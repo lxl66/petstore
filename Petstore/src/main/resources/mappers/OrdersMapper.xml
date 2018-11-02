@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf147.petstore.dao.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.nf147.petstore.entity.Orders">
+    <id column="or_id" jdbcType="INTEGER" property="orId" />
+    <result column="pet_id" jdbcType="INTEGER" property="petId" />
+    <result column="or_quantity" jdbcType="INTEGER" property="orQuantity" />
+    <result column="or_shipDate" jdbcType="TIMESTAMP" property="orShipdate" />
+    <result column="or_statuss" jdbcType="VARCHAR" property="orStatuss" />
+    <result column="or_complete" jdbcType="BIT" property="orComplete" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orders
+    where or_id = #{orId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nf147.petstore.entity.Orders">
+    insert into orders (or_id, pet_id, or_quantity, 
+      or_shipDate, or_statuss, or_complete
+      )
+    values (#{orId,jdbcType=INTEGER}, #{petId,jdbcType=INTEGER}, #{orQuantity,jdbcType=INTEGER}, 
+      #{orShipdate,jdbcType=TIMESTAMP}, #{orStatuss,jdbcType=VARCHAR}, #{orComplete,jdbcType=BIT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nf147.petstore.entity.Orders">
+    update orders
+    set pet_id = #{petId,jdbcType=INTEGER},
+      or_quantity = #{orQuantity,jdbcType=INTEGER},
+      or_shipDate = #{orShipdate,jdbcType=TIMESTAMP},
+      or_statuss = #{orStatuss,jdbcType=VARCHAR},
+      or_complete = #{orComplete,jdbcType=BIT}
+    where or_id = #{orId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select or_id, pet_id, or_quantity, or_shipDate, or_statuss, or_complete
+    from orders
+    where or_id = #{orId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select or_id, pet_id, or_quantity, or_shipDate, or_statuss, or_complete
+    from orders
+  </select>
+</mapper>

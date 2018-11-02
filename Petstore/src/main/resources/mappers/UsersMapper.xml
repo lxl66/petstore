@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf147.petstore.dao.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.nf147.petstore.entity.Users">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="u_name" jdbcType="VARCHAR" property="uName" />
+    <result column="first_Name" jdbcType="VARCHAR" property="firstName" />
+    <result column="last_Name" jdbcType="VARCHAR" property="lastName" />
+    <result column="u_email" jdbcType="VARCHAR" property="uEmail" />
+    <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
+    <result column="u_phone" jdbcType="VARCHAR" property="uPhone" />
+    <result column="u_Status" jdbcType="INTEGER" property="uStatus" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nf147.petstore.entity.Users">
+    insert into users (u_id, u_name, first_Name, 
+      last_Name, u_email, u_password, 
+      u_phone, u_Status)
+    values (#{uId,jdbcType=INTEGER}, #{uName,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR}, 
+      #{lastName,jdbcType=VARCHAR}, #{uEmail,jdbcType=VARCHAR}, #{uPassword,jdbcType=VARCHAR}, 
+      #{uPhone,jdbcType=VARCHAR}, #{uStatus,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.nf147.petstore.entity.Users">
+    update users
+    set u_name = #{uName,jdbcType=VARCHAR},
+      first_Name = #{firstName,jdbcType=VARCHAR},
+      last_Name = #{lastName,jdbcType=VARCHAR},
+      u_email = #{uEmail,jdbcType=VARCHAR},
+      u_password = #{uPassword,jdbcType=VARCHAR},
+      u_phone = #{uPhone,jdbcType=VARCHAR},
+      u_Status = #{uStatus,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select u_id, u_name, first_Name, last_Name, u_email, u_password, u_phone, u_Status
+    from users
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select u_id, u_name, first_Name, last_Name, u_email, u_password, u_phone, u_Status
+    from users
+  </select>
+</mapper>
