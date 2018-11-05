@@ -4,9 +4,9 @@ import com.nf147.petstore.entity.Pet;
 import java.util.List;
 
 public interface PetMapper {
-    int deleteByPrimaryKey(Integer petId);
+    int deleteByPrimaryKey(int caId);
 
-    int insert(Pet record);
+    int insert(Pet pet);
 
     Pet selectByPrimaryKey(Integer petId);
 
